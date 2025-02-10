@@ -1,0 +1,288 @@
+mysql> use SOEL24201050009;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> create table practical04 (ROllNo int, Name varchar(50),Marks int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into practical04 values (01, "Max",90), (02, "Ben",67), (03, "Eva", 90), (04, "Zoe", 89), (05,
+"Sam",78);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> insert into practical04 values (06, "Leo",98), (07, "Kai",98), (08, "Ray", 70), (09, "Tom", 97), (10,
+"Amy",89);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from practical04;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      2 | Ben  |    67 |
+|      3 | Eva  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Sam  |    78 |
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|      8 | Ray  |    70 |
+|      9 | Tom  |    97 |
+|     10 | Amy  |    89 |
++--------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create table practical04v1 (ROllNo int, Name varchar(50),Marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into practical04v1 values (01, "Max",92), (02, "Eli",64), (03, "Dan", 90), (04, "Zoe", 89), (05, "Liv",78);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> insert into practical04v1 values (06, "Jay",98), (07, "Kai",98), (08, "Rex", 79), (09, "Lou", 69), (10, "Gus",97);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from practical04v1;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    92 |
+|      2 | Eli  |    64 |
+|      3 | Dan  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Liv  |    78 |
+|      6 | Jay  |    98 |
+|      7 | Kai  |    98 |
+|      8 | Rex  |    79 |
+|      9 | Lou  |    69 |
+|     10 | Gus  |    97 |
++--------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from practical04 where Marks > any (select Marks from practical04 where marks > 89);
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|      9 | Tom  |    97 |
++--------+------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from practical04 where Marks >= any (select Marks from practical04 where marks > 89);
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      3 | Eva  |    90 |
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|      9 | Tom  |    97 |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from practical04 where Marks >= all (select Marks from practical04 where marks > 89);
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
++--------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from practical04 where Marks > all (select Marks from practical04 where marks > 89);
+Empty set (0.00 sec)
+
+mysql> select * from practical04 where Marks < all (select Marks from practical04 where marks > 89);
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      2 | Ben  |    67 |
+|      4 | Zoe  |    89 |
+|      5 | Sam  |    78 |
+|      8 | Ray  |    70 |
+|     10 | Amy  |    89 |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from practical04 where Marks in (89, 90, 98);
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      3 | Eva  |    90 |
+|      4 | Zoe  |    89 |
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|     10 | Amy  |    89 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from practical04 where exists (select * from practical04 where Marks > 90);
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      2 | Ben  |    67 |
+|      3 | Eva  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Sam  |    78 |
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|      8 | Ray  |    70 |
+|      9 | Tom  |    97 |
+|     10 | Amy  |    89 |
++--------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from practical04 union select * from practical04v1;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      2 | Ben  |    67 |
+|      3 | Eva  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Sam  |    78 |
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|      8 | Ray  |    70 |
+|      9 | Tom  |    97 |
+|     10 | Amy  |    89 |
+|      1 | Max  |    92 |
+|      2 | Eli  |    64 |
+|      3 | Dan  |    90 |
+|      5 | Liv  |    78 |
+|      6 | Jay  |    98 |
+|      8 | Rex  |    79 |
+|      9 | Lou  |    69 |
+|     10 | Gus  |    97 |
++--------+------+-------+
+18 rows in set (0.00 sec)
+
+mysql> select * from practical04 union all select * from practical04v1;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      2 | Ben  |    67 |
+|      3 | Eva  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Sam  |    78 |
+|      6 | Leo  |    98 |
+|      7 | Kai  |    98 |
+|      8 | Ray  |    70 |
+|      9 | Tom  |    97 |
+|     10 | Amy  |    89 |
+|      1 | Max  |    92 |
+|      2 | Eli  |    64 |
+|      3 | Dan  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Liv  |    78 |
+|      6 | Jay  |    98 |
+|      7 | Kai  |    98 |
+|      8 | Rex  |    79 |
+|      9 | Lou  |    69 |
+|     10 | Gus  |    97 |
++--------+------+-------+
+20 rows in set (0.00 sec)
+
+mysql> select * from practical04 intersect select * from practical04v1;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      4 | Zoe  |    89 |
+|      7 | Kai  |    98 |
++--------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from practical04v1 intersect select * from practical04;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      4 | Zoe  |    89 |
+|      7 | Kai  |    98 |
++--------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from practical04 except select * from practical04v1;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      2 | Ben  |    67 |
+|      3 | Eva  |    90 |
+|      5 | Sam  |    78 |
+|      6 | Leo  |    98 |
+|      8 | Ray  |    70 |
+|      9 | Tom  |    97 |
+|     10 | Amy  |    89 |
++--------+------+-------+
+8 rows in set (0.01 sec)
+
+mysql> select count(RollNo) from practical04;
++---------------+
+| count(RollNo) |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from practical04 where Name like "M%";
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
++--------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from practical04 where Name like "%n";
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      2 | Ben  |    67 |
++--------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from practical04 where Name like "%a%";
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      3 | Eva  |    90 |
+|      5 | Sam  |    78 |
+|      7 | Kai  |    98 |
+|      8 | Ray  |    70 |
+|     10 | Amy  |    89 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from practical04 limit 5;
++--------+------+-------+
+| ROllNo | Name | Marks |
++--------+------+-------+
+|      1 | Max  |    90 |
+|      2 | Ben  |    67 |
+|      3 | Eva  |    90 |
+|      4 | Zoe  |    89 |
+|      5 | Sam  |    78 |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select min(Marks) from practical04;
++------------+
+| min(Marks) |
++------------+
+|         67 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(Marks) from practical04;
++------------+
+| max(Marks) |
++------------+
+|         98 |
++------------+
+1 row in set (0.00 sec)
