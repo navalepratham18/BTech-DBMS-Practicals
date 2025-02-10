@@ -3,20 +3,20 @@ Database changed
 mysql> show tables;
 Empty set (0.01 sec)
 
-mysql> create table practical04 (ROllNo int, Name varchar(50),Marks int);
+mysql> create table practical03 (ROllNo int, Name varchar(50),Marks int);
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> insert into practical04 values (01, "Max",90), (02, "Ben",67), (03, "Eva", 90), (04, "Zoe", 89), (05,
+mysql> insert into practical03 values (01, "Max",90), (02, "Ben",67), (03, "Eva", 90), (04, "Zoe", 89), (05,
 "Sam",78);
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> insert into practical04 values (06, "Leo",98), (07, "Kai",98), (08, "Ray", 70), (09, "Tom", 97), (10,
+mysql> insert into practical03 values (06, "Leo",98), (07, "Kai",98), (08, "Ray", 70), (09, "Tom", 97), (10,
 "Amy",89);
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> select * from practical04;
+mysql> select * from practical03;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -33,18 +33,18 @@ mysql> select * from practical04;
 +--------+------+-------+
 10 rows in set (0.00 sec)
 
-mysql> create table practical04v1 (ROllNo int, Name varchar(50),Marks int);
+mysql> create table practical03v1 (ROllNo int, Name varchar(50),Marks int);
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> insert into practical04v1 values (01, "Max",92), (02, "Eli",64), (03, "Dan", 90), (04, "Zoe", 89), (05, "Liv",78);
+mysql> insert into practical03v1 values (01, "Max",92), (02, "Eli",64), (03, "Dan", 90), (04, "Zoe", 89), (05, "Liv",78);
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> insert into practical04v1 values (06, "Jay",98), (07, "Kai",98), (08, "Rex", 79), (09, "Lou", 69), (10, "Gus",97);
+mysql> insert into practical03v1 values (06, "Jay",98), (07, "Kai",98), (08, "Rex", 79), (09, "Lou", 69), (10, "Gus",97);
 Query OK, 5 rows affected (0.00 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-mysql> select * from practical04v1;
+mysql> select * from practical03v1;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -61,7 +61,7 @@ mysql> select * from practical04v1;
 +--------+------+-------+
 10 rows in set (0.00 sec)
 
-mysql> select * from practical04 where Marks > any (select Marks from practical04 where marks > 89);
+mysql> select * from practical03 where Marks > any (select Marks from practical03 where marks > 89);
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -71,7 +71,7 @@ mysql> select * from practical04 where Marks > any (select Marks from practical0
 +--------+------+-------+
 3 rows in set (0.01 sec)
 
-mysql> select * from practical04 where Marks >= any (select Marks from practical04 where marks > 89);
+mysql> select * from practical03 where Marks >= any (select Marks from practical03 where marks > 89);
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -83,7 +83,7 @@ mysql> select * from practical04 where Marks >= any (select Marks from practical
 +--------+------+-------+
 5 rows in set (0.00 sec)
 
-mysql> select * from practical04 where Marks >= all (select Marks from practical04 where marks > 89);
+mysql> select * from practical03 where Marks >= all (select Marks from practical03 where marks > 89);
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -92,10 +92,10 @@ mysql> select * from practical04 where Marks >= all (select Marks from practical
 +--------+------+-------+
 2 rows in set (0.00 sec)
 
-mysql> select * from practical04 where Marks > all (select Marks from practical04 where marks > 89);
+mysql> select * from practical03 where Marks > all (select Marks from practical03 where marks > 89);
 Empty set (0.00 sec)
 
-mysql> select * from practical04 where Marks < all (select Marks from practical04 where marks > 89);
+mysql> select * from practical03 where Marks < all (select Marks from practical03 where marks > 89);
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -107,7 +107,7 @@ mysql> select * from practical04 where Marks < all (select Marks from practical0
 +--------+------+-------+
 5 rows in set (0.00 sec)
 
-mysql> select * from practical04 where Marks in (89, 90, 98);
+mysql> select * from practical03 where Marks in (89, 90, 98);
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -120,7 +120,7 @@ mysql> select * from practical04 where Marks in (89, 90, 98);
 +--------+------+-------+
 6 rows in set (0.00 sec)
 
-mysql> select * from practical04 where exists (select * from practical04 where Marks > 90);
+mysql> select * from practical03 where exists (select * from practical03 where Marks > 90);
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -137,7 +137,7 @@ mysql> select * from practical04 where exists (select * from practical04 where M
 +--------+------+-------+
 10 rows in set (0.00 sec)
 
-mysql> select * from practical04 union select * from practical04v1;
+mysql> select * from practical03 union select * from practical03v1;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -162,7 +162,7 @@ mysql> select * from practical04 union select * from practical04v1;
 +--------+------+-------+
 18 rows in set (0.00 sec)
 
-mysql> select * from practical04 union all select * from practical04v1;
+mysql> select * from practical03 union all select * from practical03v1;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -189,7 +189,7 @@ mysql> select * from practical04 union all select * from practical04v1;
 +--------+------+-------+
 20 rows in set (0.00 sec)
 
-mysql> select * from practical04 intersect select * from practical04v1;
+mysql> select * from practical03 intersect select * from practical03v1;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -198,7 +198,7 @@ mysql> select * from practical04 intersect select * from practical04v1;
 +--------+------+-------+
 2 rows in set (0.00 sec)
 
-mysql> select * from practical04v1 intersect select * from practical04;
+mysql> select * from practical03v1 intersect select * from practical03;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -207,7 +207,7 @@ mysql> select * from practical04v1 intersect select * from practical04;
 +--------+------+-------+
 2 rows in set (0.00 sec)
 
-mysql> select * from practical04 except select * from practical04v1;
+mysql> select * from practical03 except select * from practical03v1;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -222,7 +222,7 @@ mysql> select * from practical04 except select * from practical04v1;
 +--------+------+-------+
 8 rows in set (0.01 sec)
 
-mysql> select count(RollNo) from practical04;
+mysql> select count(RollNo) from practical03;
 +---------------+
 | count(RollNo) |
 +---------------+
@@ -230,7 +230,7 @@ mysql> select count(RollNo) from practical04;
 +---------------+
 1 row in set (0.00 sec)
 
-mysql> select * from practical04 where Name like "M%";
+mysql> select * from practical03 where Name like "M%";
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -238,7 +238,7 @@ mysql> select * from practical04 where Name like "M%";
 +--------+------+-------+
 1 row in set (0.00 sec)
 
-mysql> select * from practical04 where Name like "%n";
+mysql> select * from practical03 where Name like "%n";
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -246,7 +246,7 @@ mysql> select * from practical04 where Name like "%n";
 +--------+------+-------+
 1 row in set (0.00 sec)
 
-mysql> select * from practical04 where Name like "%a%";
+mysql> select * from practical03 where Name like "%a%";
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -259,7 +259,7 @@ mysql> select * from practical04 where Name like "%a%";
 +--------+------+-------+
 6 rows in set (0.00 sec)
 
-mysql> select * from practical04 limit 5;
+mysql> select * from practical03 limit 5;
 +--------+------+-------+
 | ROllNo | Name | Marks |
 +--------+------+-------+
@@ -271,7 +271,7 @@ mysql> select * from practical04 limit 5;
 +--------+------+-------+
 5 rows in set (0.00 sec)
 
-mysql> select min(Marks) from practical04;
+mysql> select min(Marks) from practical03;
 +------------+
 | min(Marks) |
 +------------+
@@ -279,7 +279,7 @@ mysql> select min(Marks) from practical04;
 +------------+
 1 row in set (0.00 sec)
 
-mysql> select max(Marks) from practical04;
+mysql> select max(Marks) from practical03;
 +------------+
 | max(Marks) |
 +------------+
