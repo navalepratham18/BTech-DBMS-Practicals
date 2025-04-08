@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class HospitalMgmtSystem {
     private static final String url = "jdbc:mysql://localhost:3306/hospital";
     private static final String username = "root";
-    private static final String password = "MeNooob@18";
+    private static final String password = "";  // Your MySQL root Password
 
     public static void main(String[] args) {
         try{
